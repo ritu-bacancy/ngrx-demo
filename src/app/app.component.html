@@ -1,6 +1,20 @@
-<input type="text" [(ngModel)]="studentName">
-<input type="text" [(ngModel)]="gender">
-<button (click)="add()">Add Student</button>
+<div class="p-4">
+<div class="row">
+  <div class="col-4">
+    <label><b>Name</b></label>
+    <input type="text" class="form-control" [(ngModel)]="studentName">
+  </div>
+
+  <div class="col-4">
+    <label><b>Gender</b></label>
+    <input type="text" class="form-control" [(ngModel)]="gender">
+  </div>
+
+  <div class="col-4">
+
+    <button class="btn btn-primary mt-4" (click)="add()">Add Student</button>
+  </div>
+</div>
 
 <h1>Students</h1>
 
@@ -24,7 +38,7 @@
   </tbody>
 </table>
 </div>
-
+</div>
 
 <!-- Button trigger modal -->
 
