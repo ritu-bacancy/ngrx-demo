@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { addStudent, deleteStudent, updateStudent } from "src/action/student.action";
 import { Student } from "src/modal/student.modal";
+import { addStudent, deleteStudent, getDataSuccess, updateStudent } from "./student.action";
 
 export interface AppState {
     students: Student[];
@@ -23,7 +23,11 @@ const _studentReducer = createReducer(
     on(deleteStudent, (state, {id}) => ({
         ...state,
         students: state.students.filter(s => s.id !== id)
-    }))
+    })),
+    on(getDataSuccess, (state, { students }) => ({
+        ...state,
+        students
+      }))
 )
 
 export function studentReducer(state: any, action: any) {

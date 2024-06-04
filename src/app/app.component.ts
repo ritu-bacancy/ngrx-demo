@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { addStudent, deleteStudent, updateStudent,  } from 'src/action/student.action';
+import { addStudent, deleteStudent, getDataSuccess, updateStudent,  } from 'src/store/student.action';
 import { Student } from 'src/modal/student.modal';
-import { AppState } from 'src/reducer/student.reducer';
+import { HttpClient } from '@angular/common/http';
+import { distinctUntilChanged, map } from 'rxjs';
+import { AppState } from 'src/store/student.reducer';
+
 declare var bootstrap: any;
 
 @Component({
@@ -17,11 +20,27 @@ export class AppComponent {
   studentArray: Student[] = [];
   studentId:number=0;
 
-  constructor(private store: Store<AppState>){
+  constructor(private store: Store<AppState>, private http: HttpClient){}
+
+  ngOnInit() {
+    // this.getData();
     this.store.select('students').subscribe((event:any) => {
-      console.log("students..", event.students);
       this.studentArray = event.students;
     })
+
+    // this.store.select('students')
+    //   .pipe(
+    //     map((state:any) => state.students),
+    //     distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr))
+    //   )
+    //   .subscribe((students) => {
+    //     console.log("State changed, updating studentArray");
+    //     this.studentArray = students;
+    //   });
+  }
+
+  getData(){
+   this.store.dispatch(getDataSuccess({students: []}))
   }
   
   add() {

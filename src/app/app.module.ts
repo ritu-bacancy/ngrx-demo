@@ -4,8 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { studentReducer } from 'src/reducer/student.reducer';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { studentReducer } from 'src/store/student.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentEffects } from 'src/store/student.effects';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    StoreModule.forRoot({ students: studentReducer })
+    HttpClientModule,
+    StoreModule.forRoot({ students: studentReducer }),
+    EffectsModule.forRoot([StudentEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
