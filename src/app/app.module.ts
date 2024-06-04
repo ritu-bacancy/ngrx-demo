@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { studentReducer } from 'src/store/student.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { StudentEffects } from 'src/store/student.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -21,6 +23,11 @@ import { StudentEffects } from 'src/store/student.effects';
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot({ students: studentReducer }),
+    StoreDevtoolsModule.instrument({
+      name: 'NGRX Demo App DevTools',
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     EffectsModule.forRoot([StudentEffects])
   ],
   providers: [],
